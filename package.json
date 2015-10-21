@@ -1,11 +1,12 @@
 {
-  "name": "async-eventemitter",
-  "version": "0.2.2",
+  "name": "async-eventemitter-jl",
   "description": "Just like EventEmitter, but with support for callbacks and interuption of the listener-chain",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "grunt test"
   },
+  "repository": "github:Jeff-Lewis/async-eventemitter",
   "keywords": [
     "event",
     "async",
@@ -13,16 +14,18 @@
     "callback"
   ],
   "author": "Andreas Hultgren",
+  "contributors": "Jeff Lewis",
   "license": "MIT",
+  "engines" : { "node" : ">=4.0.0" },
   "dependencies": {
-    "async": "~0.2.9"
+    "async": "^1.4.2"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.7.1",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-mocha-test": "^0.11.0",
-    "mocha": "~1.17.1",
-    "should": "~2.0.2"
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.3.3",
+    "should": "^7.1.1"
   }
 }

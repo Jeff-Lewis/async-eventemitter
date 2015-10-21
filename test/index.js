@@ -2,10 +2,10 @@
 
 /*global it:true, describe:true*/
 /*jshint unused:false*/
-var should = require('should'),
-    AsyncEventEmitter = require('../.'),
-    events,
-    i;
+var should = require('should');
+var AsyncEventEmitter = require('../.');
+var events;
+var i;
 
 describe('An instance', function () {
   it('should be created', function () {
@@ -84,16 +84,6 @@ describe('emit()', function () {
     });
 
     events.emit('function-only', done);
-  });
-});
-
-describe('eventlisteners', function () {
-  it('should be synchronous if no next-argument specified', function (done) {
-    events.on('sync', function (e) {
-      e.should.equal(1);
-    });
-
-    events.emit('sync', 1, done);
   });
 });
 
@@ -348,24 +338,5 @@ describe('after()', function () {
 
     events._events.test2[1].should.equal(listener);
     events._events.test2.length.should.equal(2);
-  });
-});
-
-describe('Sync listener returning an Error', function () {
-  function err () {
-    throw new Error('Die!');
-  }
-
-  it('should abort the listener chain', function (done) {
-    events.on('errorTest', err);
-    events.on('errorTest', function () {
-      // Just make sure this is never run
-      true.should.equal(false);
-    });
-
-    events.emit('errorTest', function (err) {
-      err.should.be.instanceOf(Error);
-      done();
-    });
   });
 });

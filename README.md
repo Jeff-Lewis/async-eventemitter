@@ -1,13 +1,12 @@
 # AsyncEventEmitter
 
 > An EventEmitter that supports serial execution of asynchronous event listeners.
-> It also supports event listeners without callbacks (synchronous), as well as
 > interrupting the call-chain (similar to the DOM's e.stopPropagation()).
 
 
 ## Example
 
-```javascript
+``` javascript
 var AsyncEventEmitter = require('async-eventemitter');
 var events = new AsyncEventEmitter();
 
@@ -17,12 +16,6 @@ events.on('test', function (e, next) {
 });
 
 events
-  .on('test', function (e) {
-    // This is a synchronous event listener (note the lack of a second
-    // callback argument)
-    console.log(e);
-    // { data: 'data' }
-  })
   .on('test', function (e, next) {
     // Even if you're not truly asynchronous you can use next() to stop propagation
     next(new Error('You shall not pass'));
@@ -46,17 +39,12 @@ differences which should be noted.
 
 * Data sent to event listeners (`eg emit(data)`) must always be **zero** or
   **one** argument, and can *not* be a function.
-* Event listeners will always recieve the data object, which may or may not be
+* Event listeners will always receive the data object, which may or may not be
   undefined.
-* The second argument can only be a callback, and will only be supplied if
-  the event listener has an arity of two or more (eg `function(e, next){}`).
-* Event listeners with an arity of one or zero (eg without a callback argument
-  specified) will be treated as synchronous.
-* Even if all event listeners are synchronous, they will still be executed
-  asynchronously (through setImmediate) and thus code suceeding `.emit()` will
-  be executed before any event listeners.
-* Interupt the callback chain in async listeners by calling the callback with
-  the error as the first parameter; in sync listeners by throwing an Error.
+* The second argument can only be a callback and will always be supplied
+  as this lib assumes all listeners are asynchronous.
+* Interrupt the callback chain in async listeners by calling the callback with
+  the error as the first parameter.
 
 
 ## Usage
